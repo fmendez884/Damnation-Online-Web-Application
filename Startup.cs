@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -45,8 +46,36 @@ namespace Damnation_Online_Web_Application
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+
+            var provider = new FileExtensionContentTypeProvider();
+            provider.Mappings[".unityweb"] = "application/octet-stream";
+            provider.Mappings[".js"] = "application/javascript";
+            provider.Mappings[".js.gz"] = "application/javascript";
+            provider.Mappings[".js.br"] = "application/javascript";
+            provider.Mappings[".wasm"] = "application/wasm";
+            provider.Mappings[".wasm.gz"] = "application/wasm";
+            provider.Mappings[".wasm.br"] = "application/wasm";
+            provider.Mappings[".gz"] = "gzip";
+            provider.Mappings[".br"] = "br";
+            provider.Mappings.Remove(".unityweb");
+            provider.Mappings.Add(".unityweb", "application/octet-stream");
+            provider.Mappings.Remove(".data");
+            provider.Mappings.Add(".data", "application/octet-stream");
+            provider.Mappings.Remove(".wasm");
+            provider.Mappings.Add(".wasm", "application/wasm");
+            provider.Mappings.Remove(".symbols.json");
+            provider.Mappings.Add(".symbols.json", "application/octet-stream");
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ContentTypeProvider = provider
+            });
+
+            //app.UseStaticFiles();
+            app.UseSpaStaticFiles(new StaticFileOptions
+            {
+                ContentTypeProvider = provider
+            });
 
             app.UseRouting();
 
