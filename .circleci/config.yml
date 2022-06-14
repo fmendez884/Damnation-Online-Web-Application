@@ -1,0 +1,44 @@
+ version: 2
+
+ jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.07
+    steps:
+      - setup_remote_docker:
+          version: 19.03.13
+      # build
+      - checkout
+      - run: docker build -t webapp .
+      # test
+      - run:
+          command: docker run webapp 
+  build_and_deploy:
+    docker:
+      - image: cimg/base:2021.07
+    steps:
+      - setup_remote_docker:
+          version: 19.03.13
+      # build
+      - checkout
+      - run: docker build .
+      # deploy
+      - heroku/install
+      - run: heroku container:login
+      - heroku/push-docker-image:
+          process-types: web
+      - heroku/release-docker-image:
+          process-types: web
+    orbs:
+      heroku: circleci/heroku@1.2.6
+    version: 2.1
+    workflows:
+      heroku_deploy:
+        jobs:
+          - build
+          - build_and_deploy:
+              requires:
+                - build
+              filters:
+                branches:
+                  only: main # only run deploy-via-git job on main branch
