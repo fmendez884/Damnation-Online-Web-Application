@@ -1,20 +1,43 @@
 version: 2.1
 
 workflows:
-  build-deploy:
+  build-deploy-staging:
     jobs:
-      - build-deploy
+      - build-deploy-staging
+      - build-deploy-staging:
+          filters:
+            branches:
+              only: staging
+  build-deploy-production:
+    jobs:
+      - build-deploy-production
+      - build-deploy-production:
+          filters:
+            branches:
+              only: main
 
 jobs:
-  build-deploy:
+  build-deploy-staging:
     machine: true
     steps:
       - checkout
       - run:
-          name: Build and push Docker image to Heroku
+          name: Build and push Docker image to Heroku Staging App
           command: |
             set -x
             sudo curl https://cli-assets.heroku.com/install.sh | sh
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a ${HEROKU_APP_NAME_STAGING} web
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a ${HEROKU_APP_NAME_STAGING} web
+  build-deploy-production:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build and push Docker image to Heroku Production App
+          command: |
+            set -x
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a ${HEROKU_APP_NAME_PRODUCTION} web
+            HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a ${HEROKU_APP_NAME_PRODUCTION} web
