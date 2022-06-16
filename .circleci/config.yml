@@ -1,20 +1,4 @@
-version: 2.1
-
-workflows:
-  build-deploy-staging:
-    jobs:
-      - build-deploy-staging:
-          filters:
-            branches:
-              only: staging
-              ignore: main
-  build-deploy-production:
-    jobs:
-      - build-deploy-production:
-          filters:
-            branches:
-              only: main
-              ignore: staging
+version: 2.0
 
 jobs:
   build-deploy-staging:
@@ -41,3 +25,24 @@ jobs:
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:login
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:push -a ${HEROKU_APP_NAME_PRODUCTION} web
             HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:release -a ${HEROKU_APP_NAME_PRODUCTION} web
+
+workflows:
+  version: 2
+  build-deploy-staging:
+    jobs:
+      - build-deploy-staging:
+          filters:
+            branches:
+              only: 
+                - staging
+              ignore: 
+                - main
+  build-deploy-production:
+    jobs:
+      - build-deploy-production:
+          filters:
+            branches:
+              only: 
+                - staging
+              ignore: 
+                - main
