@@ -43,6 +43,6 @@ workflows:
           filters:
             branches:
               only: 
-                - staging
-              ignore: 
                 - main
+              ignore: 
+                - staging
