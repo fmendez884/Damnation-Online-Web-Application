@@ -3,18 +3,18 @@ version: 2.1
 workflows:
   build-deploy-staging:
     jobs:
-      - build-deploy-staging
       - build-deploy-staging:
           filters:
             branches:
               only: staging
+              ignore: main
   build-deploy-production:
     jobs:
-      - build-deploy-production
       - build-deploy-production:
           filters:
             branches:
               only: main
+              ignore: staging
 
 jobs:
   build-deploy-staging:
