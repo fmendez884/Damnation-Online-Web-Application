@@ -8,7 +8,7 @@ export default class GobletFire extends React.Component {
     render() {
         return (
             <div>
-                <img className="gobletFireImage" src={gobletFire} alt="leave me the fuck alone pls for the love of god pls"></img>
+                <img className="gobletFireImage" src={gobletFire} alt="leave me alone pls"></img>
             </div>
         );
     }
