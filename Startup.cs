@@ -64,7 +64,18 @@ namespace Damnation_Online_Web_Application
             provider.Mappings.Remove(".wasm");
             provider.Mappings.Add(".wasm", "application/wasm");
             provider.Mappings.Remove(".symbols.json");
-            provider.Mappings.Add(".symbols.json", "application/octet-stream");
+            //provider.Mappings.Add(".symbols.json", "application/octet-stream");
+            //provider.Mappings.Remove(".js.br");
+            //provider.Mappings.Add(".js.br", "application/javascript");
+            //provider.Mappings.Remove(".js");
+            //provider.Mappings.Add(".js", "application/javascript");
+            //provider.Mappings.Remove(".gz");
+            //provider.Mappings.Add(".gz", "application/octet-stream");
+            //provider.Mappings.Remove(".js.gz");
+            //provider.Mappings.Add(".js.gz", "application/javascript");
+            //provider.Mappings.Remove(".br");
+            //provider.Mappings.Add(".br", "application/octet-stream");
+
 
             app.UseStaticFiles(new StaticFileOptions
             {
