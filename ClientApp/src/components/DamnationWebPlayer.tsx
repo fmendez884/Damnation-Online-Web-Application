@@ -33,18 +33,25 @@ export default class DamnationWebPlayer extends React.Component {
     }
         
   devUnityContext = new UnityContext({
-    loaderUrl: "./Build/WebGLBuild.loader.js",
-    dataUrl: "./Build/WebGLBuild.data",
-    frameworkUrl: "./Build/WebGLBuild.framework.js",
-    codeUrl: "./Build/WebGLBuild.wasm",
+    loaderUrl: "./Build/WebGlBuild.loader.js",
+    dataUrl: "./Build/WebGlBuild.data",
+    frameworkUrl: "./Build/WebGlBuild.framework.js",
+    codeUrl: "./Build/WebGlBuild.wasm",
   });
 
     prodUnityContext = new UnityContext({
-        loaderUrl: "./Build/WebGLBuild.loader.js",
-        dataUrl: "./Build/WebGLBuild.data",
-        frameworkUrl: "./Build/WebGLBuild.framework.js",
-        codeUrl: "./Build/WebGLBuild.wasm",
+        loaderUrl: "./Build/WebGlBuild.loader.js",
+        dataUrl: "./Build/WebGlBuild.data",
+        frameworkUrl: "./Build/WebGlBuild.framework.js",
+        codeUrl: "./Build/WebGlBuild.wasm",
     });
+
+    uhh = new UnityContext({
+      loaderUrl: "./Build/WebGLBuild.loader.js",
+      dataUrl: "./Build/WebGLBuild.data",
+      frameworkUrl: "./Build/WebGLBuild.framework.js",
+      codeUrl: "./Build/WebGLBuild.wasm",
+  });
 
 
 
@@ -68,7 +75,8 @@ export default class DamnationWebPlayer extends React.Component {
     return (
     
         <div className="WebPlayer" style={{ width: this.webPlayerWidth }}>
-            <Unity unityContext={this.isProduction() ? this.prodUnityContext : this.devUnityContext} 
+            {/* <Unity unityContext={this.isProduction() ? this.prodUnityContext : this.devUnityContext}  */}
+            <Unity unityContext = {this.uhh}
             style={{width: this.webPlayerWidth}}
             className="game-canvas"/>
         </div> 
