@@ -6,6 +6,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Clear cache
+          command: |
+            npm cache clean --force
+      - run:
           name: Build and push Docker image to Heroku Staging App
           command: |
             set -x
@@ -17,6 +21,10 @@ jobs:
     machine: true
     steps:
       - checkout
+      - run:
+          name: Clear cache
+          command: |
+            npm cache clean --force
       - run:
           name: Build and push Docker image to Heroku Production App
           command: |
