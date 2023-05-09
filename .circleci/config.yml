@@ -6,14 +6,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Specific Docker Version
+          name: Install specific Docker version
           command: |
             set -x
             sudo apt-get remove docker docker-engine docker.io containerd runc
             curl -fsSL https://get.docker.com -o get-docker.sh
-            VERSION=20.10.16 sh get-docker.sh
-            sudo systemctl start docker
-            rm get-docker.sh
+            VERSION=20.10.16
+            sh get-docker.sh || true
+            sudo -E sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-downgrades docker-ce=5:20.10.16~3-0~ubuntu-jammy docker-ce-cli=5:20.10.16~3-0~ubuntu-jammy containerd.io >/dev/null
       - run:
           name: Build and push Docker image to Heroku Staging App
           command: |
@@ -27,14 +27,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Specific Docker Version
+          name: Install specific Docker version
           command: |
             set -x
             sudo apt-get remove docker docker-engine docker.io containerd runc
             curl -fsSL https://get.docker.com -o get-docker.sh
-            VERSION=20.10.16 sh get-docker.sh
-            sudo systemctl start docker
-            rm get-docker.sh
+            VERSION=20.10.16
+            sh get-docker.sh || true
+            sudo -E sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-downgrades docker-ce=5:20.10.16~3-0~ubuntu-jammy docker-ce-cli=5:20.10.16~3-0~ubuntu-jammy containerd.io >/dev/null
       - run:
           name: Build and push Docker image to Heroku Production App
           command: |
