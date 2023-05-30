@@ -33,17 +33,17 @@ export default class DamnationWebPlayer extends React.Component {
     }
         
   devUnityContext = new UnityContext({
-    loaderUrl: "./Build/WebGLBuild.loader.js",
-    dataUrl: "./Build/WebGLBuild.data",
-    frameworkUrl: "./Build/WebGLBuild.framework.js",
-    codeUrl: "./Build/WebGLBuild.wasm",
+    loaderUrl: "./Build/WebGL.loader.js",
+    dataUrl: "./Build/WebGL.data",
+    frameworkUrl: "./Build/WebGL.framework.js",
+    codeUrl: "./Build/WebGL.wasm",
   });
 
     prodUnityContext = new UnityContext({
-        loaderUrl: "./Build/WebGLBuild.loader.js",
-        dataUrl: "./Build/WebGLBuild.data",
-        frameworkUrl: "./Build/WebGLBuild.framework.js",
-        codeUrl: "./Build/WebGLBuild.wasm",
+        loaderUrl: "./Build/WebGL.loader.js",
+        dataUrl: "./Build/WebGL.data",
+        frameworkUrl: "./Build/WebGL.framework.js",
+        codeUrl: "./Build/WebGL.wasm",
     });
 
 
